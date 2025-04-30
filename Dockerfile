@@ -1,5 +1,5 @@
 # Use Node.js 18 slim image (Debian-based)
-FROM node:18-slim
+FROM ghcr.io/home-assistant/amd64-base-debian:bookworm
 
 # Install necessary tools and libraries
 RUN apt-get update && apt-get install -y \
@@ -35,7 +35,7 @@ COPY backend/functions .
 RUN npm run build
 
 # Create local storage directory and set permissions
-RUN mkdir -p /app/local-storage && chmod 777 /app/local-storage
+RUN mkdir -p /config/reader-screenshot && chmod 777 /config/reader-screenshot && ln -s /config/reader-screenshot /app/local-storage
 
 # Expose the port the app runs on
 EXPOSE 3000
